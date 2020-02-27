@@ -1,92 +1,55 @@
-#include <iostream>
-#include <stdio.h>
-#include <string>
+#include<iostream>
+#include<stdio.h>
+#include<string>
 using namespace std;
-void front_seat_generator(){
-    int seat_no , front_seat_no;
-    string seat_type;
-    bool rnd = false;
-    cout<<"\n"<<"enter the seat number  between 1 and 108 :  ";
-    cin>>seat_no;
-    if(seat_no < 1 || seat_no > 108){
-        cout<<"\n"<<"invalid seat number";
-    }
-    else if(seat_no%12==0){
-        seat_type = "WS";
-        front_seat_no = seat_no-11;
-    }
-    else if((seat_no+11)%12==0){
-        seat_type = "WS";
-        front_seat_no = seat_no+11;
-    }
-    else if(seat_no%12!=0&& seat_no %6 == 0){
-        seat_type = "WS";
-        front_seat_no = seat_no+1;
-    }
-     else if((seat_no-1)%12!=0&& (seat_no-1) %6 == 0){
-        seat_type = "WS";
-        front_seat_no = seat_no-1;
-    }
-    else if((seat_no+1)%12==0)
+bool isPrinme(int a){
+    bool check = false;
+    for(int i = 2; i <= a/2; i++)
     {
-        seat_type = "MS";
-        front_seat_no = seat_no-9;
+        if(a%i==0){
+            check = true;
+        }
     }
-    else if((seat_no+10)%12==0)
-    {
-        seat_type = "MS";
-        front_seat_no = seat_no+9;
-    }
-    else if((seat_no+1)%3==0&&(seat_no+1)%6!=0){
-        seat_type = "MS";
-        front_seat_no = seat_no-3;
-    }
-    else if((seat_no+4)%3==0&&(seat_no+4)%6!=0){
-        seat_type = "MS";
-        front_seat_no = seat_no+3;
-    }
-    else if((seat_no+2)%12==0)
-    {
-        seat_type = "AS";
-        front_seat_no = seat_no - 7;
-    }
-    else if((seat_no+9)%12==0)
-    {
-        seat_type = "AS";
-        front_seat_no = seat_no + 7;
-    }
-    else if((seat_no + 3)%12==0){
-        seat_type = "AS";
-        front_seat_no = seat_no - 5;
-    }
-    else if((seat_no + 8)%12==0){
-        seat_type = "AS";
-        front_seat_no = seat_no + 5;
-    }
-    
-    
-    
-    
-    
-    cout<<front_seat_no<<" "<<seat_type;
-
-    
-    
-    
-    }
-
-
-
-
-
-int main(){
-    int test_cases;
-    int count = 0;
-    cout<<"enter the number of test cases  : ";
-    cin>>test_cases;
-    while(count < test_cases){
-        front_seat_generator();
-        count++;
-    }
-    return 0;
+    if(check == false){return true;}
+    else{return false;}
 }
+void replace(char s){
+
+        int a;
+        int count = 0;
+        a = s;
+        while(isPrinme(a)==false){
+                if(isPrinme(a-count))
+                a = a-count;
+                else if(isPrinme(a+count))
+                a = a + count;
+                else if(isPrinme(a-count)&&isPrinme(a+count))
+                a = a-count;
+                else{
+                    count++;
+                }
+
+        }
+    s = a;
+    cout<<s;
+}
+int main(){
+    
+    int t , l;
+    cin>>t;  
+    string s;
+    for(int i = 0; i < t; i++){
+    cin>>l;
+    cin>>s;
+    for(int i = 0; i <l; i++ ){
+        replace(s[i]);
+    }
+    }
+return 0;
+}
+
+
+    
+    
+
+
